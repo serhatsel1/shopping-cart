@@ -1,15 +1,14 @@
-import React, { useContext } from "react";
-import { MyContext } from "../main";
+import PropTypes from "prop-types";
+import { useContext } from "react";
+import { CartContext } from "../context/CartContext";
 
-const Cart = ({ cart, emptyCart }) => {
-  const { name } = useContext(MyContext);
-
+const Cart = () => {
+  const { cart, emptyCart } = useContext(CartContext);
   const total = cart.reduce((acc, item) => acc + item.price, 0);
 
   if (cart.length === 0) return;
   return (
     <div className="border ml-auto w-72 p-4 mt-2 rounded-lg shadow-lg">
-      <span>{name}</span>
       <h2 className="text-2xl font-semibold mb-4">Sepet</h2>
       <ul>
         {cart.map((item, i) => (
@@ -31,4 +30,8 @@ const Cart = ({ cart, emptyCart }) => {
   );
 };
 
+Cart.propTypes = {
+  cart: PropTypes.array,
+  emptyCart: PropTypes.func,
+};
 export default Cart;
